@@ -70,7 +70,14 @@ public class WFC_MapGenerator : MonoBehaviour
 
     void ClearExistingTiles()
     {
+        // Make a copy of the children before destroying
+        List<Transform> children = new List<Transform>();
         foreach (Transform child in transform)
+        {
+            children.Add(child);
+        }
+
+        foreach (Transform child in children)
         {
             DestroyImmediate(child.gameObject);
         }
@@ -109,6 +116,8 @@ public class WFC_MapGenerator : MonoBehaviour
             CollapseCell(0, y, waterOptions);
             CollapseCell(mapWidth - 1, y, waterOptions);
         }
+
+
     }
 
     void CollapseCell(int x, int y, List<Option> allowed)
